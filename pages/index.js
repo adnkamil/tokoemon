@@ -39,7 +39,7 @@ export default function Home({pokemons}) {
 
   return (
     <>
-      <Title/>
+      <Title title={'Tokoemon'}/>
       <Navbar/>
       <Container>
         <h2>Jumlah owned : {jumlah}</h2>

@@ -29,27 +29,22 @@ const Image = styled.img`
   width: 100%;
 `
 
-export default function CardList({pokemon}) {
-  const { name, image } = pokemon
-  const router = useRouter()
+export default function CardFavorite({pokemon, deleteFav}) {
+  const { name, image, nickName, types } = pokemon
   
-  // useEffect(() => {
-  //   setName(pokemon.name)
-  //   console.log('diload')
-  // }, [])
+  const router = useRouter()
 
   const goToDetail = (name) => {
     router.push(`detail/${name}`)
-    // alert('hai')
-    // console.log(name);
   }
 
   return (
-    <Card onClick={() => {goToDetail(name)}}>
-      <ContainerImage>
+    <Card >
+      <ContainerImage onClick={() => {goToDetail(name)}}>
         <Image src={image} alt={name}/>
       </ContainerImage>
-      <div>{name}</div>
+      <div>{nickName}</div>
+      <button onClick={() => deleteFav(nickName)}>Delete</button>
     </Card>
   )
 }

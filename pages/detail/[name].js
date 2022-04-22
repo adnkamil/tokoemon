@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { favorites } from "../../helper/graphql";
 import { GET_POKEMON } from "../../queries/fetchData";
 import styled from "@emotion/styled";
+import Title from "../../component/Head";
 
 const Modal = styled.div`
   width:100%;
@@ -41,8 +42,7 @@ export default function Detail() {
   const [moves, setMoves] = useState([])
   const [types, setTypes] = useState([])
   const [img, setImg] = useState()
-  const [nickName, setNickname] = useState()
-
+  
   useEffect(() => {
     if (!loading && data) {
       setNamePokemon(data.pokemon.name)
@@ -53,14 +53,12 @@ export default function Detail() {
   },[data])
   
   const catchPokemon = () => {
-    let favoriteWithNickname = {...data.pokemon, nickName: nickName}
     
-    let probability = Math.random()   
+    // let probability = Math.random() 
+    let probability = 0.6   
     if (probability >= 0.5) {           //probabilty catch is 50%
       alert(`${name} ditambahkan`)
       setModal(!modal)
-      // const oldFavorites = favorites()
-      // favorites([...oldFavorites, favoriteWithNickname])
     } else {
       alert(`${name} kabur`)
     }
@@ -68,32 +66,37 @@ export default function Detail() {
 
   const addNickName = (event) => {
     event.preventDefault();
-    console.log('ditambah');
-    setNickname(event.target[0].value)
-    setModal(!false)
+    let favoriteWithNickname = {...data.pokemon, nickName: event.target[0].value}
+    const oldFavorites = favorites()
+    favorites([...oldFavorites, favoriteWithNickname])
+    setModal(!modal)
   }
-  
+
   return (
     <>
+      <Title title={namePokemon}/>
       <Navbar />
       {loading && <div>Loading...</div>}
       {modal && <Modal>
         <ModalContent>
           <form onSubmit={addNickName}>
             <Input type="text" placeholder="Nickname"/>
-            <button type="submit">Submit</button>
-            <button onClick={() => setModal(!modal)}>Close</button>
+            <div>
+              <button type="submit">Submit</button>
+              <button onClick={() => setModal(!modal)}>Close</button>
+
+            </div>
           </form>
         </ModalContent>
       </Modal>}
       <button onClick={catchPokemon}>Catch Pokemon</button>
       <h1>{namePokemon}</h1>
-      <img src={img} style={{ }} alt=""/>
+      <img src={img} style={{ }} alt={namePokemon}/>
       {moves && moves.map((move,index) => (
         <h4 key={index}>{move.name}</h4>
       ))}
       {types && types.map((type, index) => (
-        <h4 key={index}>{type.name}</h4>
+        <h4 key={index}>{type}</h4>
       ))}
     </>
   );
