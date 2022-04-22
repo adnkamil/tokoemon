@@ -89,11 +89,11 @@ export default function Detail() {
       <button onClick={catchPokemon}>Catch Pokemon</button>
       <h1>{namePokemon}</h1>
       <img src={img} style={{ }} alt=""/>
-      {moves && moves.map(move => (
-        <h4>{move.name}</h4>
+      {moves && moves.map((move,index) => (
+        <h4 key={index}>{move.name}</h4>
       ))}
-      {types && types.map(type => (
-        <h4>{type.name}</h4>
+      {types && types.map((type, index) => (
+        <h4 key={index}>{type.name}</h4>
       ))}
     </>
   );
