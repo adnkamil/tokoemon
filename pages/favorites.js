@@ -31,11 +31,6 @@ const CardCon = styled.div`
 
 export default function Favorites() {
   const { loading, error, data } = useQuery(FETCH_FAVORITES)
-  // const [pokemonsFav, setPokemonsFav] = useState()
-
-  // useEffect(() => {
-  //   setPokemonsFav(data.favorites)
-  // },[pokemonsFav])
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error...</p>
@@ -54,17 +49,16 @@ export default function Favorites() {
     <>
       <Title title="Favorites"/>
       <Navbar/>
-      <h1>Ini favorite</h1>
-      {JSON.stringify(data.favorites)}
       <Container>
-        <PokemonCon>
+      <h1>Ini favorite</h1>
+        {/* <PokemonCon> */}
           <CardCon>
             {data.favorites && data.favorites.map(pokemon => (
               <CardFavorite key={pokemon.id} pokemon={pokemon} deleteFav={(nickName) => handleDeleteFavorite(nickName)}/>
             ))}
           </CardCon>
           <div>Load More</div>
-        </PokemonCon>
+        {/* </PokemonCon> */}
       </Container>
     </>
   )

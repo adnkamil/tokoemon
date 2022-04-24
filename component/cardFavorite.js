@@ -14,6 +14,9 @@ const Card = styled.div`
   height:350px;
   text-align: center;
   box-shadow: rgb(0 0 0 / 22%) 0px 1px 6px 0px;
+  @media (max-width: 640px) {
+    width: 80%
+  };
 `
 
 const ContainerImage = styled.div`
@@ -27,10 +30,19 @@ const ContainerImage = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  @media (max-width: 640px) {
+    width: 80%;
+  };
+`
+
+const NamePokemon = styled.div`
+  @media (max-width: 640px) {
+    font-size: 20px;
+  };
 `
 
 export default function CardFavorite({pokemon, deleteFav}) {
-  const { name, image, nickName, types } = pokemon
+  const { name, image, nickName } = pokemon
   
   const router = useRouter()
 
@@ -43,7 +55,7 @@ export default function CardFavorite({pokemon, deleteFav}) {
       <ContainerImage onClick={() => {goToDetail(name)}}>
         <Image src={image} alt={name}/>
       </ContainerImage>
-      <div>{nickName}</div>
+      <NamePokemon>{nickName}</NamePokemon>
       <button onClick={() => deleteFav(nickName)}>Delete</button>
     </Card>
   )

@@ -43,14 +43,13 @@ export default function Home({pokemons}) {
       <Navbar/>
       <Container>
         <h2>Jumlah owned : {jumlah}</h2>
-        <PokemonCon>
+        {/* <PokemonCon> */}
           <CardCon>
             {pokemons && pokemons.map(pokemon => (
               <CardList key={pokemon.id} pokemon={pokemon}/>
             ))}
           </CardCon>
-          <div>Load More</div>
-        </PokemonCon>
+        {/* </PokemonCon> */}
       </Container>
     </>
   )

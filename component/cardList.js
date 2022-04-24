@@ -14,6 +14,9 @@ const Card = styled.div`
   height:350px;
   text-align: center;
   box-shadow: rgb(0 0 0 / 22%) 0px 1px 6px 0px;
+  @media (max-width: 640px) {
+    width: 80%
+  };
 `
 
 const ContainerImage = styled.div`
@@ -27,21 +30,24 @@ const ContainerImage = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  @media (max-width: 640px) {
+    width: 80%;
+  };
 `
+
+const NamePokemon = styled.div`
+  @media (max-width: 640px) {
+    font-size: 20px;
+  };
+`
+
 
 export default function CardList({pokemon}) {
   const { name, image } = pokemon
   const router = useRouter()
   
-  // useEffect(() => {
-  //   setName(pokemon.name)
-  //   console.log('diload')
-  // }, [])
-
   const goToDetail = (name) => {
     router.push(`detail/${name}`)
-    // alert('hai')
-    // console.log(name);
   }
 
   return (
@@ -49,7 +55,7 @@ export default function CardList({pokemon}) {
       <ContainerImage>
         <Image src={image} alt={name}/>
       </ContainerImage>
-      <div>{name}</div>
+      <NamePokemon>{name}</NamePokemon>
     </Card>
   )
 }

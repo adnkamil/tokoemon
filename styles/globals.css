@@ -6,7 +6,6 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   max-width: 1200px;
   margin: auto;
-  box-sizing: border-box;
 }
 
 a {
@@ -16,4 +15,17 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* Navbar */
+@media (max-width: 640px) {
+  header .responsive_nav {
+    transform: none;
+  }
+
+  nav .close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
 }

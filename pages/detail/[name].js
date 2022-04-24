@@ -27,7 +27,6 @@ const ModalContent = styled.div`
 `
 
 const Input = styled.input`
-
 `
 
 export default function Detail() {
@@ -42,6 +41,7 @@ export default function Detail() {
   const [moves, setMoves] = useState([])
   const [types, setTypes] = useState([])
   const [img, setImg] = useState()
+  const [classification, setClassification] = useState()
   
   useEffect(() => {
     if (!loading && data) {
@@ -49,11 +49,11 @@ export default function Detail() {
       setMoves(data.pokemon.attacks.special)
       setTypes(data.pokemon.types)
       setImg(data.pokemon.image)
+      setClassification(data.pokemon.classification)
     }
   },[data])
   
   const catchPokemon = () => {
-    
     // let probability = Math.random() 
     let probability = 0.6   
     if (probability >= 0.5) {           //probabilty catch is 50%
@@ -89,15 +89,103 @@ export default function Detail() {
           </form>
         </ModalContent>
       </Modal>}
-      <button onClick={catchPokemon}>Catch Pokemon</button>
-      <h1>{namePokemon}</h1>
-      <img src={img} style={{ }} alt={namePokemon}/>
-      {moves && moves.map((move,index) => (
-        <h4 key={index}>{move.name}</h4>
-      ))}
-      {types && types.map((type, index) => (
-        <h4 key={index}>{type}</h4>
-      ))}
+      <CardDetail>
+        <Name>{namePokemon}</Name>
+        <Image src={img} alt={namePokemon}/>
+        <Clasification>
+          <h3>Clasification</h3>
+          <div>{classification}</div>
+        </Clasification>
+        <Moves>
+          <h3>Moves</h3>
+          <Ul>
+            {moves && moves.map((move,index) => (
+              <Li key={index}>{move.name}</Li>
+              ))}
+          </Ul>
+        </Moves>
+        <Types>
+          <h3>Types</h3>
+          <Ul>
+            {types && types.map((type, index) => (
+              <Li key={index}>{type}</Li>
+              ))}
+          </Ul>
+        </Types>
+        <Button onClick={catchPokemon}>Catch Pokemon</Button>
+      </CardDetail>
     </>
   );
 }
+
+const CardDetail = styled.div`
+  margin:50px auto;
+  width: 80%;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 22%) 0px 1px 6px 0px;
+  display: grid;
+  grid-template-areas:
+    "name name"
+    "img classification"
+    "img moves"
+    "img types"
+    "button button";
+  grid-template-columns: 45% 55%;
+  @media (max-width: 640px) {
+    grid-template-areas:
+      "name"
+      "img"
+      "classification"
+      "moves"
+      "types"
+      "button";
+    grid-template-columns: 100%;
+  };
+`
+
+
+const Name = styled.h1`
+  grid-area: name;
+`
+
+const Image = styled.img`
+  grid-area: img;
+  margin: auto;
+  @media (max-width: 640px) {
+    width: 80%;
+    margin-bottom: 50px;
+  };
+`
+
+
+const Clasification = styled.div`
+  grid-area: "classification";
+`
+
+const Ul = styled.ul`
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+`
+const Li = styled.li`
+  list-style: none;
+  margin: 0 5px;
+  background-color: gold;
+`
+
+const Moves = styled.div`
+  grid-area: moves;
+`
+
+const Types = styled.div`
+  grid-area: types;
+`
+
+const Button = styled.button`
+  grid-area: button;
+  width: 200px;
+  padding: 10px;
+  margin: 30px auto;
+  border-radius: 7px;
+`
