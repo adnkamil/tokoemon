@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 import {FaTimes, FaBars} from 'react-icons/fa'
-import Head from 'next/head'
 
 export default function Navbar() {
   const navRef = useRef()
@@ -18,11 +17,11 @@ export default function Navbar() {
         <Nav ref={navRef}>
           <Li><Link href="/"><a>Home</a></Link></Li>
           <Li><Link href="/favorites"><a>My Pokemon</a></Link></Li>
-          <Button onClick={showNavBar} className="close-btn">
+          <Button onClick={showNavBar} className="close-btn" aria-label="close-nav">
             <FaTimes/>
           </Button>
         </Nav>
-        <Button onClick={showNavBar}>
+        <Button onClick={showNavBar} aria-label="open-nav">
           <FaBars/>
         </Button>
       </Header>

@@ -7,28 +7,6 @@ import { GET_POKEMON } from "../../queries/fetchData";
 import styled from "@emotion/styled";
 import Title from "../../component/Head";
 
-const Modal = styled.div`
-  width:100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-const ModalContent = styled.div`
-  width: 500px;
-  height: 300px;
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-`
-
-const Input = styled.input`
-`
-
 export default function Detail() {
   const router = useRouter()
   
@@ -54,8 +32,7 @@ export default function Detail() {
   },[data])
   
   const catchPokemon = () => {
-    // let probability = Math.random() 
-    let probability = 0.6   
+    let probability = Math.random() 
     if (probability >= 0.5) {           //probabilty catch is 50%
       alert(`${name} ditambahkan`)
       setModal(!modal)
@@ -80,10 +57,11 @@ export default function Detail() {
       {modal && <Modal>
         <ModalContent>
           <form onSubmit={addNickName}>
+            <h2>Add your pokemon nickname!</h2>
             <Input type="text" placeholder="Nickname"/>
             <div>
-              <button type="submit">Submit</button>
-              <button onClick={() => setModal(!modal)}>Close</button>
+              <ButtonModal type="submit">Submit</ButtonModal>
+              <ButtonModal onClick={() => setModal(!modal)}>Close</ButtonModal>
 
             </div>
           </form>
@@ -93,11 +71,11 @@ export default function Detail() {
         <Name>{namePokemon}</Name>
         <Image src={img} alt={namePokemon}/>
         <Clasification>
-          <h3>Clasification</h3>
+          <TitleDetail>Clasification</TitleDetail>
           <div>{classification}</div>
         </Clasification>
         <Moves>
-          <h3>Moves</h3>
+          <TitleDetail>Moves</TitleDetail>
           <Ul>
             {moves && moves.map((move,index) => (
               <Li key={index}>{move.name}</Li>
@@ -105,10 +83,10 @@ export default function Detail() {
           </Ul>
         </Moves>
         <Types>
-          <h3>Types</h3>
+          <TitleDetail>Types</TitleDetail>
           <Ul>
             {types && types.map((type, index) => (
-              <Li key={index}>{type}</Li>
+              <Li key={index} className={type}>{type}</Li>
               ))}
           </Ul>
         </Types>
@@ -117,6 +95,37 @@ export default function Detail() {
     </>
   );
 }
+
+// styled
+const Modal = styled.div`
+  width:100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+const ModalContent = styled.div`
+  width: 500px;
+  height: 300px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  margin: auto;
+`
+
+const Input = styled.input`
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  color: #495057;
+  padding: 0.375rem 0.75rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin: 1rem 0;
+`
 
 const CardDetail = styled.div`
   margin:50px auto;
@@ -144,7 +153,6 @@ const CardDetail = styled.div`
   };
 `
 
-
 const Name = styled.h1`
   grid-area: name;
 `
@@ -157,7 +165,10 @@ const Image = styled.img`
     margin-bottom: 50px;
   };
 `
-
+const TitleDetail = styled.div`
+  font-size: 25px;
+  font-weight: 600;
+`
 
 const Clasification = styled.div`
   grid-area: "classification";
@@ -167,11 +178,13 @@ const Ul = styled.ul`
   display: flex;
   justify-content: center;
   padding: 5px 0;
+  margin: 0;
 `
 const Li = styled.li`
   list-style: none;
   margin: 0 5px;
-  background-color: gold;
+  padding: 5px 10px;
+  border-radius: 4px;
 `
 
 const Moves = styled.div`
@@ -188,4 +201,19 @@ const Button = styled.button`
   padding: 10px;
   margin: 30px auto;
   border-radius: 7px;
+  background-color: #007bff;
+  border-color: #007bff;
+  border: 1px solid transparent;
+  color: #fff;
+  cursor: pointer;
+`
+
+const ButtonModal = styled.button`
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  margin-right: 10px;
+  border: 1px solid transparent;
 `

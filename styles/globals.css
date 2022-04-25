@@ -29,3 +29,35 @@ a {
     right: 2rem;
   }
 }
+
+/* type pokemon */
+.Rock {
+  background-color: rgb(148, 81, 81);
+}
+.Ghost {
+  background-color: rgb(247, 247, 247);
+}
+.Electric {
+  background-color: rgb(255, 255, 161);
+}
+.Bug {
+  background-color: #F6D6A7;
+}
+.Poison {
+  background-color: #e0a7f6;
+}
+.Normal {
+  background-color: #F4F4F4;
+}
+.Fairy {
+  background-color: rgba(255, 192, 203, 0.863);
+}
+.Fire {
+  background-color: #FBE3DF;
+}
+.Grass {
+  background-color:#E2F9E1;
+}
+.Water {
+  background-color:#E0F1FD;
+}

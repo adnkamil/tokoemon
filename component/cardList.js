@@ -1,7 +1,26 @@
-import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 
+export default function CardList({pokemon}) {
+  const { name, image } = pokemon
+  const router = useRouter()
+  
+  const goToDetail = (name) => {
+    router.push(`detail/${name}`)
+  }
+
+  return (
+    <Card onClick={() => {goToDetail(name)}}>
+      <ContainerImage>
+        <Image src={image} alt={name} width={500} height={500}/>
+      </ContainerImage>
+      <NamePokemon>{name}</NamePokemon>
+    </Card>
+  )
+}
+
+// styled
 const Card = styled.div`
   display: flex;
   flex-direction: column;  
@@ -28,34 +47,9 @@ const ContainerImage = styled.div`
   align-items: center;
 `
 
-const Image = styled.img`
-  width: 100%;
-  @media (max-width: 640px) {
-    width: 80%;
-  };
-`
-
 const NamePokemon = styled.div`
   @media (max-width: 640px) {
     font-size: 20px;
   };
 `
 
-
-export default function CardList({pokemon}) {
-  const { name, image } = pokemon
-  const router = useRouter()
-  
-  const goToDetail = (name) => {
-    router.push(`detail/${name}`)
-  }
-
-  return (
-    <Card onClick={() => {goToDetail(name)}}>
-      <ContainerImage>
-        <Image src={image} alt={name}/>
-      </ContainerImage>
-      <NamePokemon>{name}</NamePokemon>
-    </Card>
-  )
-}

@@ -6,7 +6,7 @@
     "start_url": "/",
     "name": "Tokoemon",
     "description": "Choose your pokemon and get fight!",
-    "short_name": "toko pokemon",
+    "short_name": "Tokoemon",
     "icons": [
         {
             "src": "/icon-192x192.png",

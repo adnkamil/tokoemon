@@ -1,4 +1,3 @@
-import styles from '../styles/Home.module.css'
 import Title from '../component/Head'
 import Navbar from '../component/Navbar'
 import client from '../helper/graphql'
@@ -7,28 +6,6 @@ import CardList from '../component/cardList'
 import { FETCH_FAVORITES } from '../queries/fetchData'
 import { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
-
-const PokemonCon = styled.div`
-  display: flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-`
-
-const CardCon = styled.div`
-  display: flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-`
-
 
 export default function Home({pokemons}) {
   const { data } = useQuery(FETCH_FAVORITES)
@@ -43,13 +20,11 @@ export default function Home({pokemons}) {
       <Navbar/>
       <Container>
         <h2>Jumlah owned : {jumlah}</h2>
-        {/* <PokemonCon> */}
           <CardCon>
             {pokemons && pokemons.map(pokemon => (
               <CardList key={pokemon.id} pokemon={pokemon}/>
             ))}
           </CardCon>
-        {/* </PokemonCon> */}
       </Container>
     </>
   )
@@ -77,5 +52,21 @@ export async function getServerSideProps() {
       pokemons: data.pokemons
     }
   }
-
 }
+
+
+// styled
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+
+const CardCon = styled.div`
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+`

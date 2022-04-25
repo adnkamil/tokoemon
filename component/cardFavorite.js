@@ -1,7 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
+import Image from 'next/image'
 
+export default function CardFavorite({pokemon, deleteFav}) {
+  const { name, image, nickName } = pokemon
+  
+  const router = useRouter()
+
+  const goToDetail = (name) => {
+    router.push(`detail/${name}`)
+  }
+
+  return (
+    <Card >
+      <ContainerImage onClick={() => {goToDetail(name)}}>
+        <Image src={image} alt={name} width={1000} height={1000}/>
+      </ContainerImage>
+      <NamePokemon>{nickName}</NamePokemon>
+      <button onClick={() => deleteFav(nickName)}>Delete</button>
+    </Card>
+  )
+}
+
+// styled
 const Card = styled.div`
   display: flex;
   flex-direction: column;  
@@ -28,35 +50,8 @@ const ContainerImage = styled.div`
   align-items: center;
 `
 
-const Image = styled.img`
-  width: 100%;
-  @media (max-width: 640px) {
-    width: 80%;
-  };
-`
-
 const NamePokemon = styled.div`
   @media (max-width: 640px) {
     font-size: 20px;
   };
 `
-
-export default function CardFavorite({pokemon, deleteFav}) {
-  const { name, image, nickName } = pokemon
-  
-  const router = useRouter()
-
-  const goToDetail = (name) => {
-    router.push(`detail/${name}`)
-  }
-
-  return (
-    <Card >
-      <ContainerImage onClick={() => {goToDetail(name)}}>
-        <Image src={image} alt={name}/>
-      </ContainerImage>
-      <NamePokemon>{nickName}</NamePokemon>
-      <button onClick={() => deleteFav(nickName)}>Delete</button>
-    </Card>
-  )
-}
